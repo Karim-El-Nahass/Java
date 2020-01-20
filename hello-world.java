@@ -1,1 +1,1 @@
-import Hello;
+System.out.println("Hello");
