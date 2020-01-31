@@ -1,28 +1,47 @@
 import java.awt.*;
 
+
+/**
+ * Saab95 class
+ */
 public class Saab95 extends Vehicle implements Movable {
 
     private boolean turboOn;
 
+    /**
+     * constructor for Saab95
+     */
     public Saab95(double x, double y){
         super(2, 125, Color.red, "Saab95", x, y);
         turboOn = false;
     }
 
+    /**
+     * sets turbo on
+     */
     public void setTurboOn(){
 	    turboOn = true;
     }
 
+    /**
+     * sets turbo off
+     */
     public void setTurboOff(){
 	    turboOn = false;
     }
-    
+
+    /**
+     * @return returns speed factor
+     */
+    @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
 
+    /**
+     * **/
     public void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }

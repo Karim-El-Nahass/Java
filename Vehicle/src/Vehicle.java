@@ -24,36 +24,58 @@ public abstract class Vehicle implements Movable {
         stopEngine();
     }
 
-
+    /**
+     * @return number of doors
+     */
     public int getNrDoors(){
         return nrDoors;
     }
 
+    /**
+     * @return engine power
+     */
     public double getEnginePower(){
         return enginePower;
     }
 
+    /**
+     * @return current speed
+     */
     public double getCurrentSpeed(){
         return currentSpeed;
     }
 
+    /**
+     * @return vehicle color
+     */
     public Color getColor(){
         return color;
     }
 
+    /**
+     * @param clr setter for color
+     */
     public void setColor(Color clr){
         color = clr;
     }
 
+    /**
+     * starts engine
+     */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
-
+    /**
+     * stops engine
+     */
     public void stopEngine(){
         currentSpeed = 0;
     }
 
+    /**
+     * @return returns speed factor
+     */
     public abstract double speedFactor();
 
     public abstract void incrementSpeed(double amount);
@@ -95,6 +117,9 @@ public abstract class Vehicle implements Movable {
         WEST;
     }
 
+    /**
+     * moves car forward
+     */
     @Override
     public void move() {
        switch (currentDir) {
@@ -118,6 +143,9 @@ public abstract class Vehicle implements Movable {
 
     }
 
+    /**
+     * changes direction to left
+     */
     @Override
     public void turnLeft() {
         switch (currentDir) {
@@ -140,8 +168,9 @@ public abstract class Vehicle implements Movable {
         }
     }
 
-
-
+    /**
+     * changes direction to right
+     */
     @Override
     public void turnRight() {
         switch (currentDir) {
@@ -164,6 +193,10 @@ public abstract class Vehicle implements Movable {
         }
     }
 
+    /**
+     * increases speed
+     * @param amount
+     */
     // TODO fix this method according to lab pm
     public void gas(double amount){
 
@@ -178,6 +211,10 @@ public abstract class Vehicle implements Movable {
         }
     }
 
+    /**
+     * decreases speed
+     * @param amount
+     */
     // TODO fix this method according to lab pm
     public void brake(double amount){
 
