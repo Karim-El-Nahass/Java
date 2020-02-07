@@ -8,10 +8,8 @@ import static junit.framework.TestCase.*;
 public class Tester{
     Saab95 saab = new Saab95(0,0);
     Volvo240 volvo = new Volvo240(0,0);
-    private double newSpeedSaab;
-    private double newSpeedVolvo;
-    private double tmpSpeedSaab;
-    private double tmpSpeedVolvo;
+    Scania scania = new Scania(Color.black, 500, "Scania");
+    Truck truck = new Truck(Color.white, "Truck", 0,0, 30);
 
 
     @Before
@@ -100,6 +98,7 @@ public class Tester{
 
     @Test
     public void testMove() {
+
         double tempY = saab.getY();
         double tempX = saab.getX();
 
@@ -193,5 +192,94 @@ public class Tester{
         assertEquals(volvo.getCurrentSpeed(), tmpVolvo);
 
 
+    }
+
+    @Test
+    public void raiseAndLower() {
+        scania.raise(30.0);
+        assertEquals(scania.getFlatBedAngle(), 30.0);
+        scania.raise(50.0);
+        assertEquals(scania.getFlatBedAngle(), 30.0);
+
+        scania.lower(30.0);
+        assertEquals(scania.getFlatBedAngle(), 0.0);
+        scania.lower(10.0);
+        assertEquals(scania.getFlatBedAngle(), 0.0);
+
+        scania.setCurrentSpeed(50);
+        scania.raise(30);
+        assertEquals(scania.getFlatBedAngle(), 0.0);
+        scania.lower(30);
+        assertEquals(scania.getFlatBedAngle(), 0.0);
+        scania.setCurrentSpeed(0);
+    }
+
+    @Test
+    public void moveScania() {
+        scania.setCurrentSpeed(30);
+
+        double tempY = scania.getY();
+
+        scania.move();
+        assertEquals(scania.getY(), tempY-30);
+
+        scania.setCurrentSpeed(0);
+        scania.raise(30);
+        scania.setCurrentSpeed(30);
+        scania.move();
+        assertEquals(scania.getY(), tempY-30);
+
+        scania.setCurrentSpeed(0);
+    }
+
+    @Test
+    public void loadAndUnloadTruck() throws Exception {
+        for (int i = 0; i < 8; i++) {
+            truck.load(volvo);
+        }
+        assertEquals(truck.stack.size(),8);
+        boolean overLoad = false;
+        try {
+            truck.load(volvo);
+        } catch (Exception e) {
+            overLoad = true;
+        }
+        assertTrue(overLoad);
+
+        for (int i = 0; i < 8; i++) {
+            truck.unload();
+        }
+        assertEquals(truck.stack.size(), 0);
+
+        boolean tooLarge = false;
+        try {
+            truck.load(truck);
+        } catch (Exception e) {
+            tooLarge = true;
+        }
+        assertTrue(tooLarge);
+        assertEquals(truck.stack.size(), 0);
+    }
+
+    public void lowerAndRaiseFlatBed() {
+        truck.setCurrentSpeed(30);
+        truck.raise();
+        assertFalse(truck.flatBedUp);
+
+        truck.raise();
+        assertTrue(truck.flatBedUp);
+
+        truck.lower();
+        assertFalse(truck.flatBedUp);
+    }
+
+    public void loadCoordinates() throws Exception {
+        for (int i = 0; i < 8; i++) {
+            truck.load(volvo);
+        }
+        for (Vehicle car: truck.stack) {
+            assertEquals(car.getX(), truck.getX());
+            assertEquals(car.getY(), truck.getY());
+        }
     }
 }

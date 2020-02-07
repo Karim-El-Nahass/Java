@@ -15,13 +15,14 @@ public abstract class Vehicle implements Movable {
     public String modelName; // The car model name
     private double length;
 
-    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y, double size) {
+    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y, double length) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.x = x;
         this.y = y;
+        this.length = length;
         stopEngine();
     }
 

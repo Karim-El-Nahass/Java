@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * Scania class
  */
-public class Scania extends Vehicle {
+public class Scania extends Vehicle implements Movable, ITruck {
     double flatBedAngle;
 
     public static void main(String[] args) {
@@ -13,6 +13,10 @@ public class Scania extends Vehicle {
     public Scania(Color color, int enginePower, String modelName) {
         super(2, enginePower, color, modelName, 0, 0, 20);
         this.flatBedAngle = 0;
+    }
+
+    public double getFlatBedAngle() {
+        return flatBedAngle;
     }
 
     /**
@@ -33,7 +37,12 @@ public class Scania extends Vehicle {
      * @param amount
      */
     public void lower(double amount) {
+        double temp = flatBedAngle;
         flatBedAngle = flatBedAngle - amount;
+
+        if (getCurrentSpeed() > 0 || flatBedAngle < 0 || flatBedAngle > 70) {
+            flatBedAngle = temp;
+        }
     }
 
     /**
