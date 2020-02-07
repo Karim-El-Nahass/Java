@@ -13,8 +13,9 @@ public abstract class Vehicle implements Movable {
     public double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     public String modelName; // The car model name
+    private double length;
 
-    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y) {
+    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y, double size) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -22,6 +23,10 @@ public abstract class Vehicle implements Movable {
         this.x = x;
         this.y = y;
         stopEngine();
+    }
+
+    public double getSize() {
+        return length;
     }
 
     /**
@@ -98,7 +103,7 @@ public abstract class Vehicle implements Movable {
         return x;
     }
 
-    private void setX(double x) {
+    public void setX(double x) {
         this.x = x;
     }
 
@@ -106,7 +111,7 @@ public abstract class Vehicle implements Movable {
         return y;
     }
 
-    private void setY(double y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -138,9 +143,7 @@ public abstract class Vehicle implements Movable {
            case WEST:
                setX(getX() - getCurrentSpeed());
                break;
-
        }
-
     }
 
     /**

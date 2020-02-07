@@ -1,0 +1,79 @@
+import java.awt.*;
+
+/**
+ * Scania class
+ */
+public class Scania extends Vehicle {
+    double flatBedAngle;
+
+    public static void main(String[] args) {
+        System.out.println("Success");
+    }
+
+    public Scania(Color color, int enginePower, String modelName) {
+        super(2, enginePower, color, modelName, 0, 0, 20);
+        this.flatBedAngle = 0;
+    }
+
+    /**
+     * raises the flatbed
+     * @param amount
+     */
+    public void raise(double amount) {
+        double temp = flatBedAngle;
+        flatBedAngle = flatBedAngle + amount;
+
+        if (getCurrentSpeed() > 0 || flatBedAngle < 0 || flatBedAngle > 70) {
+            flatBedAngle = temp;
+        }
+    }
+
+    /**
+     * lowers the flatbed
+     * @param amount
+     */
+    public void lower(double amount) {
+        flatBedAngle = flatBedAngle - amount;
+    }
+
+    /**
+     * moves the
+     */
+    @Override
+    public void move() {
+        if (flatBedAngle == 0) {
+            switch (getCurrentDir()) {
+                case NORTH:
+                    setY(getY() - getCurrentSpeed());
+                    break;
+
+                case EAST:
+                    setX(getX() + getCurrentSpeed());
+                    break;
+
+                case SOUTH:
+                    setY(getY() + getCurrentSpeed());
+                    break;
+
+                case WEST:
+                    setX(getX() - getCurrentSpeed());
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public double speedFactor() {
+        return enginePower * 0.01;
+    }
+
+    @Override
+    public void incrementSpeed(double amount) {
+
+    }
+
+    @Override
+    public void decrementSpeed(double amount) {
+        //
+    }
+}

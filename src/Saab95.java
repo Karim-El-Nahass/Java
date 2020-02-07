@@ -4,7 +4,7 @@ import java.awt.*;
 /**
  * Saab95 class
  */
-public class Saab95 extends Vehicle implements Movable {
+public class Saab95 extends Vehicle implements Movable, ICar {
 
     private boolean turboOn;
 
@@ -15,7 +15,7 @@ public class Saab95 extends Vehicle implements Movable {
      */
 
     public Saab95(double x, double y){
-        super(2, 125, Color.red, "Saab95", x, y);
+        super(2, 125, Color.red, "Saab95", x, y, 4.16);
         turboOn = false;
     }
 
