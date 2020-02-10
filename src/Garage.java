@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Garage<T extends ICar> {
     int max;
     T type;
-    ArrayList<T> spaces;
+    ArrayList<T> spaces = new ArrayList<T>();
 
     Garage(int max) {
         this.max = max;
@@ -17,14 +17,16 @@ public class Garage<T extends ICar> {
     }
 
     T pickUp(T vehicle) {
-//        int index;
+        T x = null;
 
         for (T v : spaces) {
              if (v.equals(vehicle)) {
 
+                 x = vehicle;
                  spaces.remove(vehicle);
+                 break;
              }
         }
-        return vehicle;
+        return x;
     }
 }

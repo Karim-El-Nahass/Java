@@ -43,7 +43,9 @@ public class Truck extends Vehicle implements Movable, ITruck {
      * raises the flatbed
      */
     public void raise() {
-        flatBedUp = true;
+        if (getCurrentSpeed() == 0) {
+            flatBedUp = true;
+        }
     }
 
     /**
@@ -66,6 +68,14 @@ public class Truck extends Vehicle implements Movable, ITruck {
 
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
+    public boolean isFlatBedUp() {
+        return flatBedUp;
+    }
+
+    public void setFlatBedUp(boolean flatBedUp) {
+        this.flatBedUp = flatBedUp;
     }
 
     @Override

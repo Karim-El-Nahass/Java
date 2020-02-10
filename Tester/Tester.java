@@ -10,7 +10,7 @@ public class Tester{
     Volvo240 volvo = new Volvo240(0,0);
     Scania scania = new Scania(Color.black, 500, "Scania");
     Truck truck = new Truck(Color.white, "Truck", 0,0, 30);
-
+    Garage<ICar> garage = new Garage<>(4);
 
     @Before
     public void init() {
@@ -19,6 +19,7 @@ public class Tester{
         volvo.setCurrentSpeed(30);
         volvo.setCurrentDir(Vehicle.direction.NORTH);
     }
+//    Saab95 & Volvo240
 
     @Test
     public void saab95() {
@@ -77,9 +78,6 @@ public class Tester{
 
         volvo.setColor(Color.YELLOW);
         assertEquals(Color.YELLOW, volvo.getColor());
-
-
-
 
     }
 
@@ -193,6 +191,7 @@ public class Tester{
 
 
     }
+//    Scania
 
     @Test
     public void raiseAndLower() {
@@ -232,6 +231,7 @@ public class Tester{
         scania.setCurrentSpeed(0);
     }
 
+//    Truck
     @Test
     public void loadAndUnloadTruck() throws Exception {
         for (int i = 0; i < 8; i++) {
@@ -261,18 +261,25 @@ public class Tester{
         assertEquals(truck.stack.size(), 0);
     }
 
+    @Test
     public void lowerAndRaiseFlatBed() {
-        truck.setCurrentSpeed(30);
-        truck.raise();
-        assertFalse(truck.flatBedUp);
+
+        assertFalse(truck.isFlatBedUp());
 
         truck.raise();
-        assertTrue(truck.flatBedUp);
+        assertTrue(truck.isFlatBedUp());
 
         truck.lower();
-        assertFalse(truck.flatBedUp);
+        assertFalse(truck.isFlatBedUp());
+
+        truck.setCurrentSpeed(30);
+        truck.raise();
+        assertFalse(truck.isFlatBedUp());
+
+        truck.setCurrentSpeed(0);
     }
 
+    @Test
     public void loadCoordinates() throws Exception {
         for (int i = 0; i < 8; i++) {
             truck.load(volvo);
@@ -282,4 +289,27 @@ public class Tester{
             assertEquals(car.getY(), truck.getY());
         }
     }
+//    Garage
+    @Test
+    public void insertAndPickUp() {
+        Volvo240 volvo1 = new Volvo240(0,0);
+        Volvo240 volvo2 = new Volvo240(0,0);
+        Saab95 saab1 = new Saab95(0,0);
+        Saab95 saab2 = new Saab95(0,0);
+
+        garage.insert(volvo1);
+        garage.insert(volvo2);
+        garage.insert(saab1);
+        garage.insert(saab2);
+
+        assertEquals(garage.spaces.size(), 4);
+        garage.insert(volvo);
+        assertEquals(garage.spaces.size(), 4);
+
+        ICar pickedVehicle = garage.pickUp(volvo2);
+        assertEquals(garage.spaces.size(), 3);
+        assertEquals(pickedVehicle, volvo2);
+
+    }
+
 }
