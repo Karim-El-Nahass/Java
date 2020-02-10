@@ -1,6 +1,8 @@
 import org.junit.Test;
 import org.junit.Before;
 
+import javax.script.Compilable;
+import javax.swing.*;
 import java.awt.*;
 
 import static junit.framework.TestCase.*;
@@ -10,7 +12,10 @@ public class Tester{
     Volvo240 volvo = new Volvo240(0,0);
     Scania scania = new Scania(Color.black, 500, "Scania");
     Truck truck = new Truck(Color.white, "Truck", 0,0, 30);
+    Garage<Volvo240> volvoGarage = new Garage<>(4);
+    Garage<Saab95> saabGarage = new Garage<>(4);
     Garage<ICar> garage = new Garage<>(4);
+
 
     @Before
     public void init() {
@@ -297,20 +302,29 @@ public class Tester{
         Saab95 saab1 = new Saab95(0,0);
         Saab95 saab2 = new Saab95(0,0);
 
+        volvoGarage.insert(volvo1);
+        volvoGarage.insert(volvo2);
+        assertEquals(volvoGarage.spaces.size(), 2);
+
+        saabGarage.insert(saab1);
+        saabGarage.insert(saab2);
+        assertEquals(saabGarage.spaces.size(), 2);
+
+//        saabGarage.insert(volvo1); //Compile time error
+//        volvoGarage.insert(saab1); //Compile time error
+
+        assertEquals(volvoGarage.pickUp(volvo2), volvo2);
+        assertEquals(volvoGarage.spaces.size(), 1);
+
         garage.insert(volvo1);
-        garage.insert(volvo2);
         garage.insert(saab1);
-        garage.insert(saab2);
+//        garage.insert(truck); //Compile time error
+        assertEquals(garage.spaces.size(),2);
 
-        assertEquals(garage.spaces.size(), 4);
-        garage.insert(volvo);
-        assertEquals(garage.spaces.size(), 4);
+        assertEquals(garage.pickUp(volvo1), volvo1);
+        assertEquals(garage.pickUp(saab1), saab1);
+        assertEquals(garage.spaces.size(), 0);
 
-        ICar pickedVehicle = garage.pickUp(volvo2);
-        assertEquals(garage.spaces.size(), 3);
-        assertEquals(pickedVehicle, volvo2);
-
-        //garage.insert(truck);
-    }
+        }
 
 }
