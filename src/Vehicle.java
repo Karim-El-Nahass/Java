@@ -15,6 +15,16 @@ public abstract class Vehicle implements Movable {
     public String modelName; // The car model name
     private double length;
 
+    /**
+     * Constructor for vehicle.
+     * @param nrDoors
+     * @param enginePower
+     * @param color
+     * @param modelName
+     * @param x
+     * @param y
+     * @param length
+     */
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y, double length) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;

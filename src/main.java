@@ -1,3 +1,4 @@
+
 public class main {
     public void main() {
         Garage<Volvo240> garage = new Garage<Volvo240>(5);

@@ -310,6 +310,7 @@ public class Tester{
         assertEquals(garage.spaces.size(), 3);
         assertEquals(pickedVehicle, volvo2);
 
+        //garage.insert(truck);
     }
 
 }

@@ -1,16 +1,31 @@
 import java.awt.*;
 import java.util.Stack;
-
+/**
+ * Truck class.
+ */
 public class Truck extends Vehicle implements Movable, ITruck {
 
     boolean flatBedUp;
     Stack<Vehicle> stack = new Stack<Vehicle>();
 
-    Truck(Color color, String modelName, double x, double y, double size) {
+    /**
+     * constructor for truck.
+     * @param color
+     * @param modelName
+     * @param x
+     * @param y
+     * @param size
+     */
+   public Truck(Color color, String modelName, double x, double y, double size) {
         super(2, 500, color, "Man", 0, 0, 30);
         flatBedUp = false;
     }
 
+    /**
+     * Loads the truck with vehicles with given conditions.
+     * @param vehicle
+     * @throws Exception
+     */
     public void load(Vehicle vehicle) throws Exception {
 
         boolean conditionX = (vehicle.getX() - this.getX()) <= 10;
@@ -29,7 +44,9 @@ public class Truck extends Vehicle implements Movable, ITruck {
             throw new Exception("Vehicle is too far away!");
         }
     }
-
+    /**
+     * Unloads vehicles from the flatbed.
+     */
     public void unload() {
 
         if (!flatBedUp) {
@@ -58,26 +75,49 @@ public class Truck extends Vehicle implements Movable, ITruck {
         }
     }
 
+    /**
+     * Decides speed.
+     * @return
+     */
     public double speedFactor() {
         return enginePower * 0.01;
     }
 
+    /**
+     * Increases speed.
+     * @param amount
+     */
     public void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
+    /**
+     * Decreases speed.
+     * @param amount
+     */
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
+    /**
+     * Checks if flatbed is up.
+     * @return
+     */
     public boolean isFlatBedUp() {
         return flatBedUp;
     }
 
+    /**
+     * Makes the flatbed go up.
+     * @param flatBedUp
+     */
     public void setFlatBedUp(boolean flatBedUp) {
         this.flatBedUp = flatBedUp;
     }
 
+    /**
+     * Describes how both truck and vehicles on the truck moves.
+     */
     @Override
     public void move() {
         switch (this.getCurrentDir()) {
