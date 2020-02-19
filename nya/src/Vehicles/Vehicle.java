@@ -46,6 +46,7 @@ public abstract class Vehicle implements Movable {
     public direction getCurrentDir() {
         return currentDir;
     }
+    public boolean engineOn = false;
 
     //-----------
 
@@ -110,6 +111,9 @@ public abstract class Vehicle implements Movable {
     //-----------
 
     public String modelName; // The car model name
+    public String getModelName() {
+        return modelName;
+    }
 
     //-----------
 
@@ -126,6 +130,7 @@ public abstract class Vehicle implements Movable {
 
     /** starts engine */
     public void startEngine(){
+        engineOn = true;
         currentSpeed = 0.1;
     }
 
@@ -134,50 +139,50 @@ public abstract class Vehicle implements Movable {
     /** stops engine */
     public void stopEngine(){
         currentSpeed = 0;
+        engineOn = false;
     }
 
     //-----------
 
     /** moves car forward */
     public void move() {
-       switch (currentDir) {
-           case NORTH:
-               setY(getY() - getCurrentSpeed());
-               break;
+            switch (currentDir) {
+                case NORTH:
+                    setY(getY() - getCurrentSpeed());
+                    break;
 
-           case EAST:
-               setX(getX() + getCurrentSpeed());
-               break;
+                case EAST:
+                    setX(getX() + getCurrentSpeed());
+                    break;
 
-           case SOUTH:
-               setY(getY() + getCurrentSpeed());
-               break;
+                case SOUTH:
+                    setY(getY() + getCurrentSpeed());
+                    break;
 
-           case WEST:
-               setX(getX() - getCurrentSpeed());
-               break;
-       }
+                case WEST:
+                    setX(getX() - getCurrentSpeed());
+                    break;
+        }
     }
 
     /** changes direction to left */
     public void turnLeft() {
-        switch (currentDir) {
-            case NORTH:
-                setCurrentDir(direction.WEST);
-                break;
+            switch (currentDir) {
+                case NORTH:
+                    setCurrentDir(direction.WEST);
+                    break;
 
-            case EAST:
-                setCurrentDir(direction.NORTH);
-                break;
+                case EAST:
+                    setCurrentDir(direction.NORTH);
+                    break;
 
-            case SOUTH:
-                setCurrentDir(direction.EAST);
-                break;
+                case SOUTH:
+                    setCurrentDir(direction.EAST);
+                    break;
 
-            case WEST:
-                setCurrentDir(direction.SOUTH);
-                break;
-
+                case WEST:
+                    setCurrentDir(direction.SOUTH);
+                    break;
         }
     }
 

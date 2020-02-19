@@ -12,8 +12,8 @@ public class Scania extends Vehicle implements ITruck {
         System.out.println("Success");
     }
 
-    public Scania(Color color, int enginePower, String modelName) {
-        super(2, enginePower, color, modelName, 0, 0, 20);
+    public Scania(double x, double y){
+        super(2, 500, Color.black, "Scania", x, y, 20);
         this.flatBedAngle = 0;
     }
 
@@ -32,6 +32,11 @@ public class Scania extends Vehicle implements ITruck {
         if (getCurrentSpeed() > 0 || flatBedAngle < 0 || flatBedAngle > 70) {
             flatBedAngle = temp;
         }
+    }
+    @Override
+    public void startEngine(){
+        if (flatBedAngle == 0) {currentSpeed = 0.1; }
+        engineOn = true;
     }
 
     /**
@@ -84,7 +89,6 @@ public class Scania extends Vehicle implements ITruck {
     }
 
     @Override
-    public void decrementSpeed(double amount) {
-        //
-    }
+    public void decrementSpeed(double amount) {this.setCurrentSpeed(this.getCurrentSpeed() - amount); }
+
 }

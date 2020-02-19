@@ -33,7 +33,13 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240(100, 500));
+        cc.cars.add(new Volvo240(0, 100));
+        cc.cars.add(new Saab95(0, 200));
+        cc.cars.add(new Scania(0,300));
+
+        for (Vehicle car : cc.cars) {
+            car.setCurrentDir(Vehicle.direction.WEST);
+        }
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -47,11 +53,24 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
             for (Vehicle car : cars) {
                 car.move();
+                if (car.getX() > 685) {
+                    car.setX(685);
+                    car.stopEngine();
+                    car.setCurrentDir(Vehicle.direction.WEST);
+                    car.startEngine();
+
+                } else if (car.getX() < 0) {
+                    car.setX(0);
+                    car.stopEngine();
+                    car.setCurrentDir(Vehicle.direction.EAST);
+                    car.startEngine();
+                }
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(car, x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -62,7 +81,10 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars) {
-            car.gas(gas);
+            if (car.engineOn) {
+                car.gas(gas);
+
+            }
         }
     }
 
@@ -70,7 +92,59 @@ public class CarController {
     void brake(int amount) {
         double brake = ((double) amount) / 100;
         for (Vehicle car : cars) {
-            car.brake(brake);
+            if (car.engineOn && car.getCurrentSpeed() > 0) {
+                car.brake(brake);
+                if (car.getCurrentSpeed() < 0) {
+                    car.setCurrentSpeed(0);
+                }
+            }
         }
     }
+
+    void startEngine() {
+        for (Vehicle car : cars) {
+            if (!car.engineOn) {
+                car.startEngine();
+            }
+        }
+    }
+    void stopEngine() {
+        for (Vehicle car : cars) {
+            car.stopEngine();
+        }
+    }
+
+    void turboOn() {
+        for (Vehicle car : cars) {
+            if (car.getModelName().equals("Saab95")) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+
+    void turboOff() {
+        for (Vehicle car : cars) {
+            if (car.getModelName().equals("Saab95")) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+
+    void liftBed() {
+        for (Vehicle car : cars) {
+            if (car.getModelName().equals("Scania")) {
+                ((Scania) car).raise(30);
+            }
+        }
+    }
+
+    void lowerBed() {
+        for (Vehicle car : cars) {
+            if (car.getModelName().equals("Scania")) {
+                ((Scania) car).lower(30);
+            }
+        }
+
+    }
+
 }

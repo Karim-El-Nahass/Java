@@ -9,7 +9,7 @@ import static junit.framework.TestCase.*;
 public class Tester{
     Saab95 saab = new Saab95(0,0);
     Volvo240 volvo = new Volvo240(0,0);
-    Scania scania = new Scania(Color.black, 500, "Scania");
+    Scania scania = new Scania(0,0);
     CarTransport carTransport = new CarTransport(Color.white);
     Garage<Volvo240> volvoGarage = new Garage<>(4);
     Garage<Saab95> saabGarage = new Garage<>(4);
@@ -104,6 +104,10 @@ public class Tester{
         double tempY = saab.getY();
         double tempX = saab.getX();
 
+        saab.move();
+        assertEquals(saab.getY(), tempY);
+
+        saab.startEngine();
         saab.move();
         assertTrue(saab.getY() < tempY);
 
