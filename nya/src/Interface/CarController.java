@@ -34,8 +34,8 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240(0, 100));
-        cc.cars.add(new Saab95(0, 200));
-        cc.cars.add(new Scania(0,300));
+        cc.cars.add(new Saab95(0, 250));
+        cc.cars.add(new Scania(0,400));
 
         for (Vehicle car : cc.cars) {
             car.setCurrentDir(Vehicle.direction.WEST);
@@ -125,7 +125,7 @@ public class CarController {
     void turboOff() {
         for (Vehicle car : cars) {
             if (car.getModelName().equals("Saab95")) {
-                ((Saab95) car).setTurboOn();
+                ((Saab95) car).setTurboOff();
             }
         }
     }
@@ -134,6 +134,7 @@ public class CarController {
         for (Vehicle car : cars) {
             if (car.getModelName().equals("Scania")) {
                 ((Scania) car).raise(30);
+                System.out.println(((Scania) car).getFlatBedAngle());
             }
         }
     }
@@ -142,6 +143,8 @@ public class CarController {
         for (Vehicle car : cars) {
             if (car.getModelName().equals("Scania")) {
                 ((Scania) car).lower(30);
+                System.out.println(((Scania) car).getFlatBedAngle());
+
             }
         }
 

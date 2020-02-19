@@ -22,8 +22,8 @@ public class CarView extends JFrame{
         initComponents(framename);
     }
 
-    private static final int X = 800; // private -> kan inte nås utanfö och behöver hårdkodas ifall man ska använda den
-    private static final int Y = 800;
+    private static final int X = 800; // private -> can not be reached outside the class.
+    private static final int Y = 800; // private as well.
 
     // The controller member
     CarController carC;

@@ -27,9 +27,12 @@ public class DrawPanel extends JPanel {
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
+            backgroundImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Background.jpg"));
+
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -37,6 +40,7 @@ public class DrawPanel extends JPanel {
     }
 
     // Just a single image, TODO: Generalize
+    BufferedImage backgroundImage;
     BufferedImage volvoImage;
     BufferedImage saabImage;
     BufferedImage scaniaImage;
@@ -68,6 +72,8 @@ public class DrawPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, null);
+
         g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
         g.drawImage(saabImage, saabPoint.x, saabPoint.y, null); // see javadoc for more info on the parameters
         g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null); // see javadoc for more info on the parameters
