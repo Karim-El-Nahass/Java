@@ -125,7 +125,7 @@ public class CarController {
     void turboOff() {
         for (Vehicle car : cars) {
             if (car.getModelName().equals("Saab95")) {
-                ((Saab95) car).setTurboOn();
+                ((Saab95) car).setTurboOff();
             }
         }
     }
