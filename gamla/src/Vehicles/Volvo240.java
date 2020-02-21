@@ -1,9 +1,11 @@
+package Vehicles;
+
 import java.awt.*;
 
 /**
  * Volvo240 class
  */
-public class Volvo240 extends Vehicle implements Movable, ICar {
+public class Volvo240 extends Vehicle implements ICar {
 
     private final static double trimFactor = 1.25;
 
@@ -15,7 +17,7 @@ public class Volvo240 extends Vehicle implements Movable, ICar {
      * @return returns speed factor
      */
     @Override
-    public double speedFactor(){
+    public double speedFactor() {
         return enginePower * 0.01 * trimFactor;
     }
 
@@ -23,17 +25,17 @@ public class Volvo240 extends Vehicle implements Movable, ICar {
 	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
-    public void decrementSpeed(double amount){
+    public void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
     // TODO fix this method according to lab pm
-    public void gas(double amount){
+    public void gas(double amount) {
         incrementSpeed(amount);
     }
 
     // TODO fix this method according to lab pm
-    public void brake(double amount){
+    public void brake(double amount) {
         decrementSpeed(amount);
     }
 }

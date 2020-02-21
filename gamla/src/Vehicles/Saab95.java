@@ -1,5 +1,6 @@
-import java.awt.*;
+package Vehicles;
 
+import java.awt.*;
 
 /**
  * Saab95 class

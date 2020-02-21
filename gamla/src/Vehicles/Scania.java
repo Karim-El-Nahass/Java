@@ -1,10 +1,12 @@
+package Vehicles;
+
 import java.awt.*;
 
 /**
  * Scania class
  */
-public class Scania extends Vehicle implements Movable, ITruck {
-    double flatBedAngle;
+public class Scania extends Vehicle implements ITruck {
+    private double flatBedAngle;
 
     public static void main(String[] args) {
         System.out.println("Success");
@@ -21,7 +23,7 @@ public class Scania extends Vehicle implements Movable, ITruck {
 
     /**
      * raises the flatbed
-     * @param amount
+     * @param amount amount
      */
     public void raise(double amount) {
         double temp = flatBedAngle;
@@ -34,7 +36,7 @@ public class Scania extends Vehicle implements Movable, ITruck {
 
     /**
      * lowers the flatbed
-     * @param amount
+     * @param amount amount
      */
     public void lower(double amount) {
         double temp = flatBedAngle;
@@ -78,7 +80,7 @@ public class Scania extends Vehicle implements Movable, ITruck {
 
     @Override
     public void incrementSpeed(double amount) {
-
+        this.setCurrentSpeed(this.getCurrentSpeed() + amount);
     }
 
     @Override
