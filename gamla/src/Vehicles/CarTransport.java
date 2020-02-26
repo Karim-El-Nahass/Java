@@ -1,30 +1,48 @@
+package Vehicles;
+
 import java.awt.*;
 import java.util.Stack;
-/**
- * Truck class.
- */
-public class Truck extends Vehicle implements Movable, ITruck {
 
-    boolean flatBedUp;
-    Stack<Vehicle> stack = new Stack<Vehicle>();
+/** Truck class */
+public class CarTransport extends Vehicle implements ITruck {
 
     /**
-     * constructor for truck.
-     * @param color
-     * @param modelName
-     * @param x
-     * @param y
-     * @param size
+     * constructor for truck
+     * @param color color
      */
-   public Truck(Color color, String modelName, double x, double y, double size) {
+    public CarTransport(Color color) {
         super(2, 500, color, "Man", 0, 0, 30);
         flatBedUp = false;
     }
 
+    //-----------
+
+    public Stack<Vehicle> stack = new Stack<>();
+
+    //-----------
+
+    boolean flatBedUp;
+
+    /*
+     * Makes the flatbed go up.
+     * @param flatBedUp flat bed up
+     */
+    // public void setFlatBedUp(boolean flatBedUp) { this.flatBedUp = flatBedUp; }
+
+    /**
+     * Checks if flatbed is up.
+     * @return flatBedUp
+     */
+    public boolean getFlatBedUp() {
+        return flatBedUp;
+    }
+
+    //-----------
+
     /**
      * Loads the truck with vehicles with given conditions.
-     * @param vehicle
-     * @throws Exception
+     * @param vehicle vehicle
+     * @throws Exception exception
      */
     public void load(Vehicle vehicle) throws Exception {
 
@@ -32,11 +50,11 @@ public class Truck extends Vehicle implements Movable, ITruck {
         boolean conditionY = (vehicle.getY() - this.getY()) <= 10;
         boolean vehicleIsClose = conditionX && conditionY;
 
-        if ((vehicle.getSize() <= 5.5) && !(flatBedUp) && vehicleIsClose && (stack.size() < 8)) {
+        if ((vehicle.getLength() <= 5.5) && !(flatBedUp) && vehicleIsClose && (stack.size() < 8)) {
             stack.push(vehicle);
         } else if (stack.size() == 8) {
             throw new Exception("Truck Full!");
-        } else if (vehicle.getSize() > 5.5) {
+        } else if (vehicle.getLength() > 5.5) {
             throw new Exception("Vehicle too large!");
         } else if (flatBedUp) {
             throw new Exception("Flatbed is up!");
@@ -44,6 +62,9 @@ public class Truck extends Vehicle implements Movable, ITruck {
             throw new Exception("Vehicle is too far away!");
         }
     }
+
+    //-----------
+
     /**
      * Unloads vehicles from the flatbed.
      */
@@ -56,6 +77,8 @@ public class Truck extends Vehicle implements Movable, ITruck {
         }
     }
 
+    //-----------
+
     /**
      * raises the flatbed
      */
@@ -64,6 +87,8 @@ public class Truck extends Vehicle implements Movable, ITruck {
             flatBedUp = true;
         }
     }
+
+    //-----------
 
     /**
      * lowers the flatbed
@@ -75,45 +100,37 @@ public class Truck extends Vehicle implements Movable, ITruck {
         }
     }
 
+    //-----------
+
     /**
      * Decides speed.
-     * @return
+     * @return returns speed factor
      */
     public double speedFactor() {
         return enginePower * 0.01;
     }
 
+    //-----------
+
     /**
      * Increases speed.
-     * @param amount
+     * @param amount amount
      */
     public void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
+    //-----------
+
     /**
      * Decreases speed.
-     * @param amount
+     * @param amount amount
      */
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    /**
-     * Checks if flatbed is up.
-     * @return
-     */
-    public boolean isFlatBedUp() {
-        return flatBedUp;
-    }
-
-    /**
-     * Makes the flatbed go up.
-     * @param flatBedUp
-     */
-    public void setFlatBedUp(boolean flatBedUp) {
-        this.flatBedUp = flatBedUp;
-    }
+    //-----------
 
     /**
      * Describes how both truck and vehicles on the truck moves.

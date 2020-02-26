@@ -1,3 +1,5 @@
+package Vehicles;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 public class Garage<T extends ICar> {
     int max;
     T type;
-    ArrayList<T> spaces = new ArrayList<T>();
+    public ArrayList<T> spaces = new ArrayList<T>();
 
     /**
      * constructor for Garage.
@@ -33,7 +35,7 @@ public class Garage<T extends ICar> {
      * @param vehicle
      * @return
      */
-    T pickUp(T vehicle) {
+    public T pickUp(T vehicle) {
         T x = null;
 
         for (T v : spaces) {

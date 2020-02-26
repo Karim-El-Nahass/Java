@@ -1,9 +1,8 @@
 import org.junit.Test;
 import org.junit.Before;
-
-import javax.script.Compilable;
-import javax.swing.*;
 import java.awt.*;
+
+import Vehicles.*;
 
 import static junit.framework.TestCase.*;
 
@@ -11,7 +10,7 @@ public class Tester{
     Saab95 saab = new Saab95(0,0);
     Volvo240 volvo = new Volvo240(0,0);
     Scania scania = new Scania(Color.black, 500, "Scania");
-    Truck truck = new Truck(Color.white, "Truck", 0,0, 30);
+    CarTransport carTransport = new CarTransport(Color.white);
     Garage<Volvo240> volvoGarage = new Garage<>(4);
     Garage<Saab95> saabGarage = new Garage<>(4);
     Garage<ICar> garage = new Garage<>(4);
@@ -240,58 +239,58 @@ public class Tester{
     @Test
     public void loadAndUnloadTruck() throws Exception {
         for (int i = 0; i < 8; i++) {
-            truck.load(volvo);
+            carTransport.load(volvo);
         }
-        assertEquals(truck.stack.size(),8);
+        assertEquals(carTransport.stack.size(),8);
         boolean overLoad = false;
         try {
-            truck.load(volvo);
+            carTransport.load(volvo);
         } catch (Exception e) {
             overLoad = true;
         }
         assertTrue(overLoad);
 
         for (int i = 0; i < 8; i++) {
-            truck.unload();
+            carTransport.unload();
         }
-        assertEquals(truck.stack.size(), 0);
+        assertEquals(carTransport.stack.size(), 0);
 
         boolean tooLarge = false;
         try {
-            truck.load(truck);
+            carTransport.load(carTransport);
         } catch (Exception e) {
             tooLarge = true;
         }
         assertTrue(tooLarge);
-        assertEquals(truck.stack.size(), 0);
+        assertEquals(carTransport.stack.size(), 0);
     }
 
     @Test
     public void lowerAndRaiseFlatBed() {
 
-        assertFalse(truck.isFlatBedUp());
+        assertFalse(carTransport.getFlatBedUp());
 
-        truck.raise();
-        assertTrue(truck.isFlatBedUp());
+        carTransport.raise();
+        assertTrue(carTransport.getFlatBedUp());
 
-        truck.lower();
-        assertFalse(truck.isFlatBedUp());
+        carTransport.lower();
+        assertFalse(carTransport.getFlatBedUp());
 
-        truck.setCurrentSpeed(30);
-        truck.raise();
-        assertFalse(truck.isFlatBedUp());
+        carTransport.setCurrentSpeed(30);
+        carTransport.raise();
+        assertFalse(carTransport.getFlatBedUp());
 
-        truck.setCurrentSpeed(0);
+        carTransport.setCurrentSpeed(0);
     }
 
     @Test
     public void loadCoordinates() throws Exception {
         for (int i = 0; i < 8; i++) {
-            truck.load(volvo);
+            carTransport.load(volvo);
         }
-        for (Vehicle car: truck.stack) {
-            assertEquals(car.getX(), truck.getX());
-            assertEquals(car.getY(), truck.getY());
+        for (Vehicle car: carTransport.stack) {
+            assertEquals(car.getX(), carTransport.getX());
+            assertEquals(car.getY(), carTransport.getY());
         }
     }
 //    Garage
@@ -324,7 +323,5 @@ public class Tester{
         assertEquals(garage.pickUp(volvo1), volvo1);
         assertEquals(garage.pickUp(saab1), saab1);
         assertEquals(garage.spaces.size(), 0);
-
         }
-
 }

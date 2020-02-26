@@ -1,29 +1,21 @@
+package Vehicles;
+
 import java.awt.*;
 
 /**
  * General class describing vehicle
  */
 public abstract class Vehicle implements Movable {
-    private direction currentDir = direction.NORTH;
-    private double x;
-    private double y;
-
-    private int nrDoors; // Number of doors on the car
-    public double enginePower; // Engine power of the car
-    public double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    public String modelName; // The car model name
-    private double length;
 
     /**
      * Constructor for vehicle.
-     * @param nrDoors
-     * @param enginePower
-     * @param color
-     * @param modelName
-     * @param x
-     * @param y
-     * @param length
+     * @param nrDoors number of doors
+     * @param enginePower engine power
+     * @param color color
+     * @param modelName model name
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param length length
      */
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double x, double y, double length) {
         this.nrDoors = nrDoors;
@@ -36,107 +28,117 @@ public abstract class Vehicle implements Movable {
         stopEngine();
     }
 
-    public double getSize() {
-        return length;
-    }
-
-    /**
-     * @return number of doors
-     */
-    public int getNrDoors(){
-        return nrDoors;
-    }
-
-    /**
-     * @return engine power
-     */
-    public double getEnginePower(){
-        return enginePower;
-    }
-
-    /**
-     * @return current speed
-     */
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    /**
-     * @return vehicle color
-     */
-    public Color getColor(){
-        return color;
-    }
-
-    /**
-     @param clr setter for color
-     */
-    public void setColor(Color clr){
-        color = clr;
-    }
-
-    /**
-     * starts engine
-     */
-    public void startEngine(){
-        currentSpeed = 0.1;
-    }
-
-    /**
-     * stops engine
-     */
-    public void stopEngine(){
-        currentSpeed = 0;
-    }
-
-    /**
-     * @return returns speed factor
-     */
-    public abstract double speedFactor();
-
-    public abstract void incrementSpeed(double amount);
-
-    public abstract void decrementSpeed(double amount);
-
-    public direction getCurrentDir() {
-        return currentDir;
-    }
-
-    public void setCurrentDir(direction currentDir) {
-        this.currentDir = currentDir;
-    }
-
-    public void setCurrentSpeed(double currentSpeed) {
-        this.currentSpeed = currentSpeed;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
+    //-----------
 
     public enum direction {
         NORTH,
         EAST,
         SOUTH,
-        WEST;
+        WEST,
     }
 
-    /**
-     * moves car forward
-     */
-    @Override
+    //-----------
+
+    private direction currentDir = direction.NORTH;
+    public void setCurrentDir(direction currentDir) {
+        this.currentDir = currentDir;
+    }
+    public direction getCurrentDir() {
+        return currentDir;
+    }
+
+    //-----------
+
+    private double x;
+    public void setX(double x) {
+        this.x = x;
+    }
+    public double getX() {
+        return x;
+    }
+
+    //-----------
+
+    private double y;
+    public void setY(double y) {
+        this.y = y;
+    }
+    public double getY() {
+        return y;
+    }
+
+    //-----------
+
+    private int nrDoors; // Number of doors on the car
+    /** @return number of doors */
+    public int getNrDoors(){
+        return nrDoors;
+    }
+
+    //-----------
+
+    public double enginePower; // Engine power of the car
+
+    /** @return engine power */
+    public double getEnginePower(){
+        return enginePower;
+    }
+
+    //-----------
+
+    public double currentSpeed; // The current speed of the car
+    public void setCurrentSpeed(double currentSpeed) { this.currentSpeed = currentSpeed; }
+    /** @return current speed */
+    public double getCurrentSpeed(){
+        return currentSpeed;
+    }
+
+    //-----------
+
+    private Color color; // Color of the car
+
+    /** @param clr color */
+    public void setColor(Color clr){
+        color = clr;
+    }
+
+    /** @return vehicle color */
+    public Color getColor(){
+        return color;
+    }
+
+    //-----------
+
+    public String modelName; // The car model name
+
+    //-----------
+
+    private double length;
+    public double getLength() { return length; }
+
+    //-----------
+
+    public abstract double speedFactor();
+    public abstract void incrementSpeed(double amount);
+    public abstract void decrementSpeed(double amount);
+
+    //-----------
+
+    /** starts engine */
+    public void startEngine(){
+        currentSpeed = 0.1;
+    }
+
+    //-----------
+
+    /** stops engine */
+    public void stopEngine(){
+        currentSpeed = 0;
+    }
+
+    //-----------
+
+    /** moves car forward */
     public void move() {
        switch (currentDir) {
            case NORTH:
@@ -157,10 +159,7 @@ public abstract class Vehicle implements Movable {
        }
     }
 
-    /**
-     * changes direction to left
-     */
-    @Override
+    /** changes direction to left */
     public void turnLeft() {
         switch (currentDir) {
             case NORTH:
@@ -185,7 +184,6 @@ public abstract class Vehicle implements Movable {
     /**
      * changes direction to right
      */
-    @Override
     public void turnRight() {
         switch (currentDir) {
             case NORTH:
@@ -209,10 +207,8 @@ public abstract class Vehicle implements Movable {
 
     /**
      * increases speed
-     * @param amount
+     * @param amount 'amount'
      */
-
-
     // TODO fix this method according to lab pm
     public void gas(double amount){
 
@@ -229,7 +225,7 @@ public abstract class Vehicle implements Movable {
 
 
     /** decreases speed
-     * @param amount
+     * @param amount 'amount'
      */
     // TODO fix this method according to lab pm
     public void brake(double amount){
