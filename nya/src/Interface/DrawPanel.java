@@ -26,7 +26,7 @@ public class DrawPanel extends JPanel {
             // everything is in the same main folder.
             // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
 
-            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
+            // Remember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
             backgroundImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Background.jpg"));
 
