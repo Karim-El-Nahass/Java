@@ -110,6 +110,9 @@ public abstract class Vehicle implements Movable {
     //-----------
 
     public String modelName; // The car model name
+    public String getModelName() {
+        return this.modelName;
+    }
 
     //-----------
 

@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -29,6 +30,10 @@ public class DrawPanel extends JPanel {
             // if you are starting in IntelliJ.
             backgroundImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Background.jpg"));
 
+            images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+            images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+            images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
@@ -40,27 +45,41 @@ public class DrawPanel extends JPanel {
     }
 
     // Just a single image, TODO: Generalize
+    ArrayList<BufferedImage> images = new ArrayList<>();
+
     BufferedImage backgroundImage;
     BufferedImage volvoImage;
     BufferedImage saabImage;
     BufferedImage scaniaImage;
 
     // To keep track of a single cars position
+    ArrayList<Point> points = new ArrayList<>();
+
     Point volvoPoint = new Point();
     Point saabPoint = new Point();
     Point scaniaPoint = new Point();
 
     // TODO: Make this general for all cars
-    void moveit(Vehicle car, int x, int y){
-        if (car.getModelName().equals("Volvo240")) {
+    void moveit(/*String modelName,*/ String name, int x, int y){
+
+        /*switch (modelName) {
+            case "Volvo240":
+                //points.get()
+                break;
+            case "Saab95":
+                break;
+            case "Scania":
+        }*/
+
+        if (name.equals("Volvo240")) {
             volvoPoint.x = x;
             volvoPoint.y = y;
         }
-        if (car.getModelName().equals("Saab95")) {
+        if (name.equals("Saab95")) {
             saabPoint.x = x;
             saabPoint.y = y;
         }
-        if (car.getModelName().equals("Scania")) {
+        if (name.equals("Scania")) {
             scaniaPoint.x = x;
             scaniaPoint.y = y;
         }

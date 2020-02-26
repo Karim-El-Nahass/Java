@@ -2,7 +2,6 @@ package Interface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import Vehicles.*;
@@ -14,22 +13,16 @@ import Vehicles.*;
  */
 
 public class CarController {
-    // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    //CarView frame;
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
 
     //methods:
 
     public static void main(String[] args) {
+        /*
         // Instance of this class
         CarController cc = new CarController();
 
@@ -46,6 +39,7 @@ public class CarController {
 
         // Start the timer
         cc.timer.start();
+        */
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -70,7 +64,8 @@ public class CarController {
                 }
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(car, x, y);
+                String name = car.getModelName();
+                frame.drawPanel.moveit(name, x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -144,10 +139,7 @@ public class CarController {
             if (car.getModelName().equals("Scania")) {
                 ((Scania) car).lower(30);
                 System.out.println(((Scania) car).getFlatBedAngle());
-
             }
         }
-
     }
-
 }
