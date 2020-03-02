@@ -20,6 +20,18 @@ public class CarController {
     * */
 
     //methods:
+    void turnCarsRight() {
+        for (Vehicle car : cars) {
+            car.turnRight();
+        }
+    }
+
+    void turnCarsLeft() {
+        for (Vehicle car : cars) {
+            car.turnLeft();
+        }
+    }
+
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;

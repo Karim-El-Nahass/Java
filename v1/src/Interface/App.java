@@ -23,6 +23,7 @@ public class App {
 
     public static void main(String[] args) {
         carController.cars.add(new Volvo240(100, 500));
+        carController.turnCarsRight();
 
         // Start the timer
         timer.start();

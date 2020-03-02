@@ -30,6 +30,10 @@ public abstract class Vehicle implements Movable {
 
     //-----------
 
+    public boolean engineOn = false;
+
+    //-----------
+
     public enum direction {
         NORTH,
         EAST,
@@ -129,6 +133,7 @@ public abstract class Vehicle implements Movable {
 
     /** starts engine */
     public void startEngine(){
+        engineOn = true;
         currentSpeed = 0.1;
     }
 
@@ -136,6 +141,7 @@ public abstract class Vehicle implements Movable {
 
     /** stops engine */
     public void stopEngine(){
+        engineOn = false;
         currentSpeed = 0;
     }
 
