@@ -24,7 +24,7 @@ public class CarView extends JFrame{
 
     public CarView(String framename, CarController cc){
         this.carC = cc;
-        this.drawPanel = new DrawPanel(X, Y-300, carC.cars, carC.carPoints);
+        this.drawPanel = new DrawPanel(X, Y-200, carC.cars, carC.carPoints);
         initComponents(framename);
     }
 
@@ -64,7 +64,7 @@ public class CarView extends JFrame{
     private void initComponents(String title) {
 
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X+200,Y+30));
+        this.setPreferredSize(new Dimension(X,Y+30));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
@@ -177,9 +177,7 @@ public class CarView extends JFrame{
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Random random = new Random();
-                int rand = random.nextInt(8);
-                carC.createCar(/*new Volvo240(100, rand * 100)*/);
+                carC.createCar();
                 carC.setCarsDir("East");
                 drawPanel.repaint();
             }
@@ -189,7 +187,7 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (carC.cars.size() != 0) {
-                    carC.removeFirstCar();
+                    carC.removeCar();
                     drawPanel.repaint();
                 }
             }

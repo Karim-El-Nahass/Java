@@ -27,40 +27,36 @@ public class CarController {
 
     //methods:
     void createCar(/*Vehicle carType*/) {
+        if (cars.size() != 10) {
 
-        String[] options = new String[] {"Volvo240", "Saab95", "Scania", "Random"};
-        int response = JOptionPane.showOptionDialog(null, "What car do you want to add?", "Add a Car",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                null, options, options[0]);
+            String[] options = new String[]{"Volvo240", "Saab95", "Scania", "Random"};
+            int response = JOptionPane.showOptionDialog(null, "What car do you want to add?", "Add a Car",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, options, options[0]);
 
-        Random random = new Random();
+            Random random = new Random();
 
-        if (response == 3) {
-            // Random random = new Random();
-            response = random.nextInt(3);
-        }
-
-        int xPos = random.nextInt(600) + 100;
-        int yPos = 20;
-
-        for (Point point : carPoints) {
-            int temp = 80;
-            if ((point.y == yPos) && (cars.size() < 7)) {
-                yPos = yPos + temp;
-                temp += 80;
+            if (response == 3) {
+                // Random random = new Random();
+                response = random.nextInt(3);
             }
-        }
 
-        if ((cars.size() < 7) && (response != -1)) {
-            Vehicle car = carFactory.makeCar(response, 0, yPos);
-            cars.add(car);
-            carPoints.add(new Point());
+            int size = cars.size();
+            int yPos = 60 * size;
+
+            if ((cars.size() < 10) && (response != -1)) {
+                Vehicle car = carFactory.makeCar(response, 0, yPos);
+                cars.add(car);
+                carPoints.add(new Point());
+            }
         }
     }
 
-    void removeFirstCar() {
-        cars.remove(0);
-        carPoints.remove(0);
+    void removeCar() {
+        if (cars.size() > 0) {
+            cars.remove(cars.get(cars.size() - 1));
+            carPoints.remove(carPoints.get(carPoints.size() - 1));
+        }
     }
 
     void setCarsDir(String direction) {

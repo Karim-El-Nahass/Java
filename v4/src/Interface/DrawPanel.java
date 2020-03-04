@@ -17,7 +17,7 @@ public class DrawPanel extends JPanel {
     public DrawPanel(int x, int y, ArrayList<Vehicle> cars, ArrayList<Point> points) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.darkGray);
         this.points = points;
         this.cars = cars;
 
@@ -79,8 +79,19 @@ public class DrawPanel extends JPanel {
                         g.drawImage(images.get(2), point.x, point.y, null);
                         break;
                 }
-
                 index++;
+            }
+        }
+
+        for (int i = 1; i < 10; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (j % 2 == 0) {
+                    g.setColor(Color.white);
+                    g.drawLine(20+j * 50, i * 60, 20+(j + 1) * 50, i * 60);
+                } else {
+                    g.setColor(Color.darkGray);
+                    g.drawLine(20+j * 50, i * 60, 20+(j + 1) * 50, i * 60);
+                }
             }
         }
     }
