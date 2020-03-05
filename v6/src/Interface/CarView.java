@@ -131,7 +131,7 @@ public class CarView extends JFrame{
 
         liftBedButton.addActionListener( carC.liftBedButton() );
 
-        liftBedButton.addActionListener( carC.lowerBedButton() );
+        lowerBedButton.addActionListener( carC.lowerBedButton() );
 
         addCarButton.addActionListener( carC.addCarButton(this) );
 
