@@ -9,7 +9,7 @@ public class Volvo240 extends Vehicle implements ICar {
 
     private final static double trimFactor = 1.25;
 
-    public Volvo240(double x, double y){
+    protected Volvo240(double x, double y){
         super(4, 100, Color.black, "Volvo240",x ,y, 4.9);
     }
 

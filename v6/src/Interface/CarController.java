@@ -21,19 +21,97 @@ public class CarController {
     // member fields:
     // A list of cars, modify if needed
     GroupCars groupCars = new GroupCars();
-    CarView carView = new CarView("CarSim 1.0", this);
-
+    CarView carView;
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
 
+    public CarController(CarView view) {
+        carView = view;
+        init();
+    }
 
     //methods:
     // void addCarButton() { groupCars.createCar(); }
 
-    void setCarsDir(Vehicle.direction dir) { groupCars.setCarsDir(dir); }
+    private void init() {
+        carView.setGasButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.gas(carView.gasAmount);
+            }
+        });
 
+        carView.setBrakeButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.brake(carView.gasAmount);
+            }
+        });
+
+        carView.setStartButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.startEngine();
+            }
+        });
+
+        carView.setStopButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.stopEngine();
+            }
+        });
+
+        carView.setTurboOnButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.turboOn();
+            }
+        });
+
+        carView.setTurboOffButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.turboOff();
+            }
+        });
+
+        carView.setLiftBedButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.liftBed();
+            }
+        });
+
+        carView.setLowerBedButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.lowerBed();
+            }
+        });
+
+        carView.setAddCarButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.createCar();
+                carView.repaint();
+            }
+        });
+
+        carView.setRemoveCarButtonAL(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                groupCars.removeCar(carView);
+            }
+        });
+
+
+    }
+
+    void setCarsDir(Vehicle.direction dir) { groupCars.setCarsDir(dir); }
+/*
     // Calls the gas method for each car once
     ActionListener gasButton(CarView carView) {
         return (new ActionListener() { public void actionPerformed(ActionEvent e) {
@@ -42,7 +120,7 @@ public class CarController {
     }
 
     // Calls the gas method for each car once
-    ActionListener brakeButton(CarView carView) {
+    ActionListener Button(CarView carView) {
         return (new ActionListener() { public void actionPerformed(ActionEvent e) {
             groupCars.brake(carView.gasAmount);
         }});
@@ -83,5 +161,5 @@ public class CarController {
         return (new ActionListener() { public void actionPerformed(ActionEvent e) {
             groupCars.removeCar(carView);
         }});
-    }
+    }*/
 }

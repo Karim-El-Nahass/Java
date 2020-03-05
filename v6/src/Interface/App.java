@@ -1,5 +1,6 @@
 package Interface;
 
+import Vehicles.GroupCars;
 import Vehicles.Vehicle;
 import Vehicles.Volvo240;
 
@@ -16,11 +17,12 @@ public class App {
     private static Timer timer = new Timer(delay, new TimerListener());
 
     // Instance of this class
-    static CarController carController = new CarController();
 
     // The frame that represents this instance View of the MVC pattern
     // Start a new view and send a reference of self
-    static CarView frame = new CarView("CarSim 1.0", carController);
+    static CarView frame = new CarView("CarSim 1.0", );
+
+    static CarController carController = new CarController(frame);
 
     public static void main(String[] args) {
         // Start the timer

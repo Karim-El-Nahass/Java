@@ -1,5 +1,6 @@
 package Interface;
 
+import Vehicles.GroupCars;
 import Vehicles.Volvo240;
 
 import javax.swing.*;
@@ -21,10 +22,10 @@ import java.util.Random;
 public class CarView extends JFrame{
     // Constructor
     CarController carC;
+    GroupCars model;
 
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
-        this.drawPanel = new DrawPanel(X, Y-200, cc.groupCars.cars, cc.groupCars.carPoints);
+    public CarView(String framename, GroupCars cars, GroupCars carPoints){ // ,GroupCars cars){
+        this.drawPanel = new DrawPanel(X, Y-200, cars, carPoints);
         initComponents(framename);
     }
 
@@ -117,7 +118,7 @@ public class CarView extends JFrame{
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-        gasButton.addActionListener( carC.gasButton( this) );
+        /*gasButton.addActionListener( carC.gasButton( this) );
 
         brakeButton.addActionListener( carC.brakeButton( this) );
 
@@ -135,7 +136,7 @@ public class CarView extends JFrame{
 
         addCarButton.addActionListener( carC.addCarButton(this) );
 
-        removeCarButton.addActionListener( carC.removeCarButton(this) );
+        removeCarButton.addActionListener( carC.removeCarButton(this) );*/
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
@@ -149,5 +150,49 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void setGasButtonAL(ActionListener a) {
+        gasButton.addActionListener(a);
+    }
+
+    public void setBrakeButtonAL(ActionListener a) {
+        brakeButton.addActionListener(a);
+    }
+
+    public void setStartButtonAL(ActionListener a) {
+        startButton.addActionListener(a);
+    }
+
+    public void setStopButtonAL(ActionListener a) {
+        stopButton.addActionListener(a);
+    }
+
+    public void setTurboOnButtonAL(ActionListener a) {
+        turboOnButton.addActionListener(a);
+    }
+
+    public void setTurboOffButtonAL(ActionListener a) {
+        turboOffButton.addActionListener(a);
+    }
+
+    public void setLiftBedButtonAL(ActionListener a) {
+        liftBedButton.addActionListener(a);
+    }
+
+    public void setLowerBedButtonAL(ActionListener a) {
+        lowerBedButton.addActionListener(a);
+    }
+
+    public void setAddCarButtonAL(ActionListener a) {
+        addCarButton.addActionListener(a);
+    }
+
+    public void setRemoveCarButtonAL(ActionListener a) {
+        removeCarButton.addActionListener(a);
+    }
+
+    public void setTurboOffButton(ActionListener a) {
+        turboOffButton.addActionListener(a);
     }
 }
